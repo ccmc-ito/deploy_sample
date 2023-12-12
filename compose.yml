@@ -1,0 +1,30 @@
+services:
+  mysql:                                  # ----------MySQLに関する設定----------
+    image: mysql:8.0.35                   # MySQLのバージョン
+    platform: linux/amd64                 # サーバーのOS
+    container_name: MySQL_CRUD_Sample     # コンテナの名前
+    ports:
+      - "3306:3306"                       # PCのポート番号:コンテナのポート番号
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass       # rootアカウントのパスワード
+      MYSQL_DATABASE: mydb                # データベース名
+      TZ: "Asia/Tokyo"                    # タイムゾーン
+      LANG: C.utf8                        # ロケール
+    volumes:
+      - mysql-volume:/var/lib/mysql       # PC上のボリューム名:コンテナ上のパス
+
+  phpmyadmin:                             # ----------phpMyAdminに関する設定----------
+    image: phpmyadmin:latest              # phpMyAdminのバージョン
+    platform: linux/amd64                 # サーバーのOS
+    container_name: phpMyAdmin_Main       # コンテナの名前
+    depends_on:                           # 必要なサービス（指定したものが起動した後にこのサービスを起動）
+      - mysql                             # サービス名：mysql
+    environment:
+      - PMA_HOSTS=mysql                   # 接続先のサービス名
+      - PMA_USER=root                     # 利用するアカウント名
+      - PMA_PASSWORD=rootpass             # 利用するパスワード
+    ports:
+      - "3010:80"                         # PCのポート番号:コンテナのポート番号
+
+volumes:                                  # ----------ボリュームの一覧----------
+  mysql-volume:                           # 使用するボリューム名
