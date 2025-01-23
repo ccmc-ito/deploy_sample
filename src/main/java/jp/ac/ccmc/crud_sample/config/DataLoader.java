@@ -24,4 +24,5 @@ public class DataLoader implements CommandLineRunner {
         // department.setName("AIプロジェクト");
         // repository.save(department);
     }
+
 }

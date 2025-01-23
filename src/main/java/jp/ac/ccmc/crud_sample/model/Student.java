@@ -17,21 +17,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "students")
+@Table(name="students")
 public class Student {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 30)
+    @NotBlank(message="名前を入力してください。")
+    @Size(max=30, message="名前は30文字以内にしてください。")
     private String name;
 
-    @NotNull
-    @Min(0)
+    @NotNull(message="年齢を入力してください。")
+    @Min(value=0, message="年齢は0以上の数値にしてください。")
     private Integer age;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name="department_id")
     private Department department;
+    
 }
