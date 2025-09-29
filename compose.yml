@@ -1,6 +1,6 @@
 services:
   mysql:                                  # ----------MySQLに関する設定----------
-    image: mysql:8.4.3                    # MySQLのバージョン
+    image: mysql:8.4.6                    # MySQLのバージョン
     platform: linux/amd64                 # サーバーのOS
     container_name: MySQL_CRUD_Sample     # コンテナの名前
     ports:
